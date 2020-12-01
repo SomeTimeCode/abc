@@ -9,6 +9,9 @@ void *simpleRobotRoutine(void *arg) {
 #endif 
   int jobID;
   while (!queueIsEmpty(task->jobQ)) {
+    if(getNumFreeSpace() == 0){
+      continue;
+    }
     queueDequeueFront(task->jobQ, &jobID);
 #ifdef DEBUG
     debug_printf(__func__, "Robot%c[%d]: working on job %d...\n", 
@@ -16,7 +19,6 @@ void *simpleRobotRoutine(void *arg) {
 #endif
     simpleWork(jobID, robot);
   }
-
   pthread_exit(NULL);
 }
 
@@ -73,3 +75,4 @@ void simpleWork(int jobID, Robot robot) {
       RobotTypeToChar(robot->robotType), robot->id, jobID, timer);
 #endif
 }
+

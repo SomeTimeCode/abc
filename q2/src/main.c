@@ -21,14 +21,37 @@ void startProduction(){
   Task task = calloc(1, sizeof(Task_t));
   task->jobQ = queueCreate(num_cars * 17);
   for (int k = 0; k < num_cars; k++){
-    for(int i = 0; i < 8; i++) { 
-      if(i == WINDOW) { 
-        for(int j = 0; j < 7; j++) queueEnqueue(task->jobQ, &i);
-      } else if(i == TIRE) { 
-        for(int j = 0; j < 4; j++) queueEnqueue(task->jobQ, &i);
-      } else queueEnqueue(task->jobQ, &i);
+    int i = 0;
+    queueEnqueue(task->jobQ, &i);
+    i = 6;
+    queueEnqueue(task->jobQ, &i);
+    i = 1;
+    queueEnqueue(task->jobQ, &i);
+    i = 2;
+    queueEnqueue(task->jobQ, &i);
+    //////////
+    i = 7;
+    queueEnqueue(task->jobQ, &i);
+    i = 3;
+    queueEnqueue(task->jobQ, &i);
+    i = 4;
+    for(int j = 0; j < 7; j++){
+      queueEnqueue(task->jobQ, &i);
     }
-  }
+    i = 5;
+    for(int j = 0; j < 4; j++){
+      queueEnqueue(task->jobQ, &i);
+    }
+    //////////
+    // for(int i = 0; i < 8; i++) { 
+    //   if(i == WINDOW) { 
+    //     for(int j = 0; j < 7; j++) queueEnqueue(task->jobQ, &i);
+    //   } else if(i == TIRE) { 
+    //     for(int j = 0; j < 4; j++) queueEnqueue(task->jobQ, &i);
+    //   } else {
+    //     queueEnqueue(task->jobQ, &i);
+    //   }
+    }
   /* Prepare task end*/
 
   /* Production start */
@@ -104,3 +127,4 @@ int main(int argc, char *argv[]) {
   printf("Production time: %lf\n", timer);
   return 0;
 }
+
